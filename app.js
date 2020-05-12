@@ -38,11 +38,23 @@ class UI {
       <th>${book.priority}</th>
       <th>${book.title}</th>
       <th>${book.website}</th>
-      <th><div>X</div></th>
+      <th><div class='delete'>X</div></th>
     `;
 
     newBook.innerHTML = newBookDetails;
     row.appendChild(newBook);
+  }
+
+  static removeBook(el) {
+    if (el.classList.contains("delete")) {
+      el.parentElement.parentElement.remove();
+    }
+  }
+
+  static clearForms(priority, title, website) {
+    document.querySelector("#priority").value = "";
+    document.querySelector("#title").value = "";
+    document.querySelector("#website").value = "";
   }
 }
 
@@ -50,7 +62,6 @@ class UI {
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
 // Event: Add Book
-
 const addBookButton = document.querySelector("#book-form");
 addBookButton.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -59,7 +70,20 @@ addBookButton.addEventListener("submit", (e) => {
   const website = document.querySelector("#website").value;
   let newWebsite = new Website(priority, title, website);
 
+  if (priority === "" || title === "" || website === "") {
+    alert("Please fill out all forms");
+    return;
+  }
+
+  // Add book
   UI.addBookToList(newWebsite);
+
+  // Clear forms
+  UI.clearForms(priority, title, website);
 });
 
 // Remove Book
+const bookList = document.querySelector("#book-list");
+bookList.addEventListener("click", (e) => {
+  UI.removeBook(e.target);
+});
