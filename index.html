@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>The Book Club</title>
+    <meta name="description" content="The HTML5 Herald" />
+    <meta name="author" content="SitePoint" />
+    <script
+      src="https://kit.fontawesome.com/9e0d8f1881.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+
+  <body>
+    <div class="main-header-container">
+      <i class="fas fa-book-open blue-text"></i>
+      My<span class="blue-text">Book</span>
+      Club
+    </div>
+    <button id="click">Click me</button>
+    <form>
+      <div class="form-group">
+        <div class="form-group">
+          <label>Priority</label>
+          <input type="text" />
+        </div>
+        <label>Title</label>
+        <input type="text" />
+      </div>
+      <div class="form-group">
+        <label>Website</label>
+        <input type="text" />
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>Title</th>
+          <th>Website</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="book-list"></tbody>
+    </table>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
