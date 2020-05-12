@@ -1,5 +1,4 @@
 // Website Class
-
 class Website {
   constructor(priority, title, website) {
     this.priority = priority;
@@ -50,6 +49,17 @@ class UI {
 // Event: Display Books;
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
+// Event: Add Book
 
-const button = document.querySelector('#click')
-button.addEventListener('click', () => alert('I was clicked!'))
+const addBookButton = document.querySelector("#book-form");
+addBookButton.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const priority = document.querySelector("#priority").value;
+  const title = document.querySelector("#title").value;
+  const website = document.querySelector("#website").value;
+  let newWebsite = new Website(priority, title, website);
+
+  UI.addBookToList(newWebsite);
+});
+
+// Remove Book
