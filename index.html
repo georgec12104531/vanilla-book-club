@@ -11,31 +11,32 @@
       src="https://kit.fontawesome.com/9e0d8f1881.js"
       crossorigin="anonymous"
     ></script>
-
+    <link rel='stylesheet' href='https://bootswatch.com/4/yeti/bootstrap.min.css'></link>
     <link rel="stylesheet" href="./app.css" />
   </head>
 
   <body>
-    <div class="main-header-container">
-      <i class="fas fa-book-open blue-text"></i>
-      My<span class="blue-text">Book</span>
-      Club
+    <div class="container mt-4">
+      <h1 class='display-4 text-center'>
+        <i class="fas fa-book-open text-primary"></i>
+        My<span class="text-primary">Book</span>
+        Club
+      </h1>
     </div>
-    <button id="add-book">Click me</button>
     <form id='book-form'>
       <div class="form-group">
-        <label>Priority</label>
-        <input id="priority" type="text" />
+        <label for='priority'>Priority</label>
+        <input id="priority" type="text" class="form-control" />
       </div>
       <div class="form-group">
-        <label>Title</label>
-        <input id="title" type="text" />
+        <label for='title'>Title</label>
+        <input id="title" type="text" class="form-control"/>
       </div>
       <div class="form-group">
-        <label>Website</label>
-        <input id="website" type="text" />
+        <label for="website">Website</label>
+        <input id="website" type="text" class="form-control"/>
       </div>
-      <button type="submit">Submit</button>
+      <input type="submit" value="Add Book" class='btn btn-primary btn-block'>Submit</input>
     </form>
     <table>
       <thead>

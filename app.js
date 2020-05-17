@@ -31,7 +31,6 @@ class UI {
   static addBookToList(book) {
     // Get the table row
     const row = document.querySelector("#book-list");
-
     let newBook = document.createElement("tr");
 
     let newBookDetails = `
