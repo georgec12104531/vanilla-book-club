@@ -50,12 +50,38 @@ class UI {
     }
   }
 
+  static showAlert(message, className) {
+    console.log(message, className);
+    const alertDiv = document.createElement("div");
+    alertDiv.className = `alert alert-${className}`;
+    const text = document.createTextNode(message);
+    alertDiv.appendChild(text);
+
+    document
+      .querySelector(".container")
+      .insertAdjacentElement("afterend", alertDiv);
+    setTimeout(() => {
+      document.querySelector(".alert").remove();
+    }, 5000);
+  }
+
+  static validate(priority, title, website) {
+    if (priority === "" || title === "" || website === "") {
+      UI.showAlert("Please fill out all forms", "danger");
+      return;
+    } else {
+      UI.showAlert("Your book was successfully added!", "success");
+    }
+  }
+
   static clearForms(priority, title, website) {
     document.querySelector("#priority").value = "";
     document.querySelector("#title").value = "";
     document.querySelector("#website").value = "";
   }
 }
+
+// Get input values
 
 // Event: Display Books;
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
@@ -69,10 +95,8 @@ addBookButton.addEventListener("submit", (e) => {
   const website = document.querySelector("#website").value;
   let newWebsite = new Website(priority, title, website);
 
-  if (priority === "" || title === "" || website === "") {
-    alert("Please fill out all forms");
-    return;
-  }
+  // Validate
+  UI.validate(priority, title, website);
 
   // Add book
   UI.addBookToList(newWebsite);
