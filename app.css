@@ -1,7 +1,7 @@
-#book-form .form-group {
+.book-club-main-container {
   margin: 10px;
 }
 
-#book-form input[type="submit"] {
-  margin: 10px;
+.btn-danger {
+  color: white;
 }

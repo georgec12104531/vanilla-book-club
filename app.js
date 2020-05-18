@@ -37,7 +37,7 @@ class UI {
       <th>${book.priority}</th>
       <th>${book.title}</th>
       <th>${book.website}</th>
-      <th><div class='delete'>X</div></th>
+      <th><a href='#' class='btn btn-danger btn-sm delete'>X</a></th>
     `;
 
     newBook.innerHTML = newBookDetails;
