@@ -7,21 +7,40 @@ class Website {
   }
 }
 
+// Storage
+class Storage {
+  static getBooks() {
+    let booksStored = localStorage.getItem("books");
+    let books = booksStored ? JSON.parse(booksStored) : [];
+
+    return books;
+  }
+
+  static addBook(book) {
+    const books = Storage.getBooks();
+    books.push(book);
+
+    localStorage.setItem("books", JSON.stringify(books));
+  }
+
+  static removeBook(website) {
+    const booksStored = JSON.parse(localStorage.getItem("books"));
+
+    for (let i = 0; i < booksStored.length; i++) {
+      if (booksStored[i].website === website) {
+        booksStored.splice(i, 1);
+      }
+    }
+
+    localStorage.setItem("books", JSON.stringify(booksStored));
+  }
+}
+
 // UI Class: Handles UI Tasks
 class UI {
   static displayBooks() {
-    const books = [
-      {
-        priority: "high",
-        title: "FreeCodeCamp Data Structures",
-        website: "www.freecodecamp.com",
-      },
-      {
-        priority: "medium",
-        title: "Udemy React 2020 Course",
-        website: "www.udemy.com/react-2020",
-      },
-    ];
+    const books = Storage.getBooks();
+    console.log(books);
 
     books.forEach((book) => {
       UI.addBookToList(book);
@@ -45,18 +64,19 @@ class UI {
   }
 
   static removeBook(el) {
+    console.log(el);
     if (el.classList.contains("delete")) {
       el.parentElement.parentElement.remove();
     }
   }
 
   static showAlert(message, className) {
-    console.log(message, className);
     const alertDiv = document.createElement("div");
     alertDiv.className = `alert alert-${className}`;
     const text = document.createTextNode(message);
     alertDiv.appendChild(text);
 
+    // Remove after 5 seconds
     document
       .querySelector(".container")
       .insertAdjacentElement("afterend", alertDiv);
@@ -101,6 +121,9 @@ addBookButton.addEventListener("submit", (e) => {
   // Add book
   UI.addBookToList(newWebsite);
 
+  //Add website to localStorage
+  Storage.addBook(newWebsite);
+
   // Clear forms
   UI.clearForms(priority, title, website);
 });
@@ -108,5 +131,7 @@ addBookButton.addEventListener("submit", (e) => {
 // Remove Book
 const bookList = document.querySelector("#book-list");
 bookList.addEventListener("click", (e) => {
+  Storage.removeBook(e.target.parentElement.previousElementSibling.textContent);
   UI.removeBook(e.target);
+  UI.showAlert("You book was successfully removed!", "success");
 });
